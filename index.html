@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AirPro Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <h1>AirPro</h1>
+  <ul>
+    <li><a href="index.html" class="active">Dashboard</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="dashboard">
+
+  <div class="card">
+    <h2>Live AQI</h2>
+    <p id="aqiValue">--</p>
+    <span id="aqiStatus">Loading</span>
+  </div>
+
+  <div class="card">
+    <h2>Battery</h2>
+    <p id="battery">--%</p>
+  </div>
+
+  <div class="card">
+    <h2>Accident Status</h2>
+    <p id="accident">--</p>
+  </div>
+
+  <div class="card">
+    <h2>Air Purifier</h2>
+    <p id="fan">--</p>
+  </div>
+
+  <div class="card">
+    <h2>AQI Gauge</h2>
+    <canvas id="aqiGauge"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>AQI Trend</h2>
+    <canvas id="aqiChart"></canvas>
+    <button onclick="exportCSV()">Export CSV</button>
+  </div>
+
+</section>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- JS -->
+<script type="module" src="js/dashboard.js"></script>
+<script type="module" src="js/charts.js"></script>
+
+</body>
+</html>

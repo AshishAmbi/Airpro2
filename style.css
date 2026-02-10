@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.active {
+  border-bottom: 2px solid white;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 25px;
+  padding: 40px;
+}
+
+.card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+}
+
+.card p {
+  font-size: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* ---------- STATIC PAGE LAYOUT ---------- */
+
+.page {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.page-card {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 35px;
+}
+
+.page-card h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.page-card h3 {
+  margin-top: 25px;
+}
+
+.page-card ul {
+  margin-left: 20px;
+}
+
+/* ---------- FEATURES GRID ---------- */
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 25px;
+  width: 100%;
+}
+
+/* reuse card style */
+.features-grid .card {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+}
+

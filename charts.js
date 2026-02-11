@@ -1,6 +1,6 @@
 import { db } from "./firebase.js";
 import { ref, onValue, push } from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+"https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const liveRef = ref(db, "helmet_01/live_data");
 const historyRef = ref(db, "helmet_01/history/aqi");
@@ -8,10 +8,10 @@ const historyRef = ref(db, "helmet_01/history/aqi");
 let values = [];
 let labels = [];
 
-function color(aqi){
-  if(aqi < 50) return "green";
-  if(aqi < 100) return "orange";
-  return "red";
+function getColor(aqi) {
+  if (aqi < 50) return "#22c55e";
+  if (aqi < 100) return "#f59e0b";
+  return "#ef4444";
 }
 
 /* LINE CHART */
@@ -27,6 +27,10 @@ const chart = new Chart(document.getElementById("aqiChart"), {
   },
   options: {
     plugins:{ legend:{ display:false }},
+    scales: {
+      x: { display:false },
+      y: { beginAtZero:true }
+    },
     responsive:true
   }
 });
@@ -37,7 +41,7 @@ const gauge = new Chart(document.getElementById("aqiGauge"), {
   data: {
     datasets: [{
       data: [0,300],
-      backgroundColor:["green","#222"],
+      backgroundColor:["#22c55e","#1f2937"],
       cutout:"75%"
     }]
   },
@@ -62,22 +66,12 @@ onValue(liveRef, (snap)=>{
   values.push(d.aqi);
   labels.push(time);
 
-  chart.data.datasets[0].borderColor = color(d.aqi);
+  chart.data.datasets[0].borderColor = getColor(d.aqi);
   chart.update();
 
   gauge.data.datasets[0].data = [d.aqi, 300-d.aqi];
-  gauge.data.datasets[0].backgroundColor[0] = color(d.aqi);
+  gauge.data.datasets[0].backgroundColor[0] = getColor(d.aqi);
   gauge.update();
 
   push(historyRef, { value:d.aqi, time:Date.now() });
 });
-
-window.exportCSV = ()=>{
-  let csv = "Time,AQI\n";
-  values.forEach((v,i)=> csv += `${labels[i]},${v}\n`);
-  const blob = new Blob([csv],{type:"text/csv"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "AQI_Data.csv";
-  a.click();
-};
